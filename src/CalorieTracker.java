@@ -11,33 +11,48 @@ public class CalorieTracker {
         return currentCalorieIntake;
     }
 
+    public int getGoal() {
+        return goal;
+    }
+
+    public void setGoal(int goal) {
+        if (goal > 0) {
+            this.goal = goal;
+        }
+    }
+
     public boolean reachedLimit(){
         return (currentCalorieIntake >= goal);
     }
 
     public String getGoalMessage() {
-        String message = "You haven't eaten so much today! lets eat more";
+        String message = "You haven't eaten so much today! Let's eat more!";
         if(currentCalorieIntake > goal){
-            message = "You've exceeded your limit for today :(";
+            message = "You've exceeded your limit for today :(\nBetter luck next time.";
         } else if(currentCalorieIntake == goal){
-            message = "You've reached your limit! Stop eating.";
-        } else if(currentCalorieIntake/goal > .75){
-            message = "You are 3/4 of the way to your limit.";
-        } else if(currentCalorieIntake/goal > .50){
-            message = "You are more than halfway to your limit";
-        } else if(currentCalorieIntake/goal > .25){
-            message = "You're a quarter of the way to your daily limit.";
+            message = "You've reached 100% of your daily limit! Stop eating.";
+        } else if((double)currentCalorieIntake/goal > .75){
+            message = "You are more than 75% of the way to your daily limit)";
+        } else if((double)currentCalorieIntake/goal > .50){
+            message = "You are more than 50% to your daily limit";
+        } else if((double)currentCalorieIntake/goal > .25){
+            message = "You are more than 25% of the way to your daily limit.";
         }
         return message;
     }
 
-    public void updateCalorieIntake(int caloriesToAdd){
-        currentCalorieIntake += caloriesToAdd;
+
+    public void addCalories(int caloriesToAdd){
+
+        if (caloriesToAdd > 0) {
+            currentCalorieIntake += caloriesToAdd;
+        }
     }
 
-    public String display(){
+    @Override
+    public String toString(){
         StringBuilder string = new StringBuilder();
-        string.append("Your daily goal is " + goal + " and your current calorie intake is " + currentCalorieIntake);
+        string.append("Your daily goal is " + goal + " and your current calorie intake is " + currentCalorieIntake + ".");
         return string.toString();
     }
 }
