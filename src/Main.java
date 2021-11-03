@@ -101,7 +101,7 @@ public class Main {
                 default:
                     JOptionPane.showMessageDialog(null, "END OF DAY REPORT:\n" +  user.displayInfo()
                             + "\n" + tracker.getGoalMessage());
-                    JOptionPane.showMessageDialog(null, "Exciting.\nSee you tomorrow!");
+                    JOptionPane.showMessageDialog(null, "Exiting.\nSee you tomorrow!");
             }
         } while(choice!=6);
     }
