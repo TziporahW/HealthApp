@@ -34,7 +34,7 @@ public class CalorieTracker {
         } else if((double)currentCalorieIntake/goal > .75){
             message = "You are more than 75% of the way to your daily limit)";
         } else if((double)currentCalorieIntake/goal > .50){
-            message = "You are more than 50% to your daily limit";
+            message = "You are more than 50% of the way to your daily limit";
         } else if((double)currentCalorieIntake/goal > .25){
             message = "You are more than 25% of the way to your daily limit.";
         }
