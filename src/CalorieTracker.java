@@ -1,3 +1,5 @@
+package health;
+
 public class CalorieTracker {
     private int goal;
     private int currentCalorieIntake;
@@ -52,7 +54,9 @@ public class CalorieTracker {
     @Override
     public String toString(){
         StringBuilder string = new StringBuilder();
-        string.append("Your daily goal is " + goal + " and your current calorie intake is " + currentCalorieIntake + ".");
+        string.append("Your daily calorie intake goal is " + goal + " calories.");
+        string.append("\nYour current calorie intake is " + currentCalorieIntake + " calories.");
+        string.append("\n" + getGoalMessage());
         return string.toString();
     }
 }
