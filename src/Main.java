@@ -1,3 +1,5 @@
+package health;
+
 import javax.swing.*;
 
 public class Main {
@@ -47,7 +49,15 @@ public class Main {
                     + "Enter menu option (1-6) you would like to perform: "));
 
             while(choice > 6 || choice < 1) {
-                choice =  Integer.parseInt(JOptionPane.showInputDialog("Invalid Entry! Enter a number from 1-6: "));
+                choice =  Integer.parseInt(JOptionPane.showInputDialog("Invalid Entry! Enter a number from 1-6: \n" + 
+                		"Menu Options:\n"
+                        + "1. Add Calories \n"
+                        + "2. View Progress \n"
+                        + "3. Update Goal \n"
+                        + "4. View Profile \n"
+                        + "5. Update Profile \n"
+                        + "6. End Day \n"
+                        + "Enter menu option (1-6) you would like to perform: "));
             }
 
             switch(choice) {
@@ -55,7 +65,7 @@ public class Main {
                 case 1:
                     int caloriesToAdd = Integer.parseInt(JOptionPane.showInputDialog("How many calories did you eat since we saw you last? "));
                     tracker.addCalories(caloriesToAdd);
-                    JOptionPane.showMessageDialog(null, tracker.getGoalMessage());
+                    JOptionPane.showMessageDialog(null, "Your current calorie intake is: " + tracker.getCurrentCalories() + " calories.");
 
                     if (tracker.reachedLimit()) {
                         JOptionPane.showMessageDialog(null, tracker.getGoalMessage());
@@ -63,26 +73,33 @@ public class Main {
                     break;
 
                 case 2:
-                    JOptionPane.showMessageDialog(null, user.displayInfo()
-                            + "\n" + tracker.getGoalMessage());
+                    JOptionPane.showMessageDialog(null, user.displayInfo());
                     break;
                 case 3:
-                    int goal = Integer.parseInt(JOptionPane.showInputDialog("Your current daily calorie intake goal is " + user.getCalorieTracker().getGoal()
+                    int goal = Integer.parseInt(JOptionPane.showInputDialog("Your current daily calorie intake goal is " + user.getCalorieTracker().getGoal() + " calories."
                             + "\nWhat do you want want your new goal to be? "));
+                    
+                    while (goal < 0) {
+                    	goal = Integer.parseInt(JOptionPane.showInputDialog("Invalid Goal! \nEnter a positive number."));
+                    }
+                    
                     tracker.setGoal(goal);
-                    JOptionPane.showMessageDialog(null, "Calorie goal has been updated to " + goal);
+                    JOptionPane.showMessageDialog(null, "Calorie goal has been updated to " + goal + " calories.");
                     break;
                 case 4:
                     JOptionPane.showMessageDialog(null, user.displayProfile());
                     break;
                 case 5:
+                	
                     int profileOption =  Integer.parseInt(JOptionPane.showInputDialog("What would you like to update?\n"
                             + "1. Weight \n"
                             + "2. Height \n"
                             + "Enter the profile option (1-2) you would like to update: "));
 
                     while(profileOption > 2 || profileOption < 1) {
-                        profileOption =  Integer.parseInt(JOptionPane.showInputDialog("Invalid Entry! Enter number from 1-2: "));
+                        profileOption =  Integer.parseInt(JOptionPane.showInputDialog("Invalid Entry! Enter number from 1-2: \n"
+                        		+ "1. Weight \n"
+                                + "2. Height"));
                     }
                     switch(profileOption) {
                         case 1:
@@ -99,10 +116,10 @@ public class Main {
                     break;
 
                 default:
-                    JOptionPane.showMessageDialog(null, "END OF DAY REPORT:\n" +  user.displayInfo()
-                            + "\n" + tracker.getGoalMessage());
+                    JOptionPane.showMessageDialog(null, "END OF DAY REPORT:\n" +  user.displayInfo());
                     JOptionPane.showMessageDialog(null, "Exiting.\nSee you tomorrow!");
             }
         } while(choice!=6);
     }
 }
+
