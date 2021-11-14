@@ -51,6 +51,12 @@ public class CalorieTracker {
         }
     }
 
+    public void burnCalories(int caloriesBurned) {
+        if(caloriesBurned > 0) {
+            currentCalorieIntake -= caloriesBurned;
+        }
+    }
+
     @Override
     public String toString(){
         StringBuilder string = new StringBuilder();

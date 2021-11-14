@@ -13,10 +13,12 @@ public class Person {
         this.name = name;
         this.height = height;
         this.weight = weight;
-        
+
+
         //goal is set to 0 or higher
         if (goal < 0) {
-        	goal = 0;
+            goal = 0;
+
         }
         tracker = new CalorieTracker(goal);
     }
