@@ -1,4 +1,6 @@
+
 import java.util.ArrayList;
+
 
 import javax.swing.*;
 
@@ -46,6 +48,7 @@ public class Main {
                     + "2. Update Menu  \n"                                            // change wording --- if anyone has suggestions go for it
                     + "3. View Progress \n"
                     + "4. View Profile \n"
+
                     + "5. End Day \n"
                     + "Enter menu option (1-4) you would like to perform: "));
 
@@ -58,11 +61,13 @@ public class Main {
                         + "4. View Profile \n"
                         + "5. End Day \n"
                         + "Enter menu option (1-4) you would like to perform: "));
+
             }
 
             switch (choice) {
 
                 case 1:
+
                     int calChoice = Integer.parseInt(JOptionPane.showInputDialog("Options: \n" +
                             "1. Add Calories " +
                             "2. Decrease Calories through Exercise "));
@@ -89,22 +94,39 @@ public class Main {
                         }
                     }
 
+
                     if (tracker.reachedLimit()) {
                         JOptionPane.showMessageDialog(null, tracker.getGoalMessage());
                     }
                     break;
 
                 case 2:
+
                     updateMenu(user, tracker);
+
+
                     break;
 
                 case 3:
+
                     JOptionPane.showMessageDialog(null, user.displayInfo());
+
+//                     int goal = Integer.parseInt(JOptionPane.showInputDialog("Your current daily calorie intake goal is " + user.getCalorieTracker().getGoal() + " calories."
+//                             + "\nWhat do you want want your new goal to be? "));
+                    
+//                     while (goal < 0) {
+//                     	goal = Integer.parseInt(JOptionPane.showInputDialog("Invalid Goal! \nEnter a positive number."));
+//                     }
+                    
+//                     tracker.setGoal(goal);
+//                     JOptionPane.showMessageDialog(null, "Calorie goal has been updated to " + goal + " calories.");
+
                     break;
 
                 case 4:
                     JOptionPane.showMessageDialog(null, user.displayProfile());
                     break;
+
 
                 default:
                     StringBuilder allFoods = new StringBuilder();
@@ -192,6 +214,19 @@ public class Main {
                     while (profileOption > 2 || profileOption < 1) {
                         profileOption = Integer.parseInt(JOptionPane.showInputDialog(
                                 "Invalid Entry! Enter number from 1-2: \n" + "1. Weight \n" + "2. Height"));
+
+//                 case 5:
+                	
+//                     int profileOption =  Integer.parseInt(JOptionPane.showInputDialog("What would you like to update?\n"
+//                             + "1. Weight \n"
+//                             + "2. Height \n"
+//                             + "Enter the profile option (1-2) you would like to update: "));
+
+//                     while(profileOption > 2 || profileOption < 1) {
+//                         profileOption =  Integer.parseInt(JOptionPane.showInputDialog("Invalid Entry! Enter number from 1-2: \n"
+//                         		+ "1. Weight \n"
+//                                 + "2. Height"));
+
                     }
                     switch (profileOption) {
 
@@ -212,8 +247,16 @@ public class Main {
                             break;
                     }
                     break;
+
                 default: JOptionPane.showMessageDialog(null, "Back to Main Menu");
+
+
+//                 default:
+//                     JOptionPane.showMessageDialog(null, "END OF DAY REPORT:\n" +  user.displayInfo());
+//                     JOptionPane.showMessageDialog(null, "Exiting.\nSee you tomorrow!");
+
             }
         } while (choice != 3);
     }
 }
+
