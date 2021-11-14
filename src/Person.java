@@ -9,15 +9,19 @@ public class Person {
 
     public Person(String name, int height, int weight, int goal){
         this.name = name;
-        tracker = new CalorieTracker(goal);
         this.height = height;
         this.weight = weight;
+
+        //goal is set to 0 or higher
+        if (goal < 0) {
+            goal = 0;
+        }
+        tracker = new CalorieTracker(goal);
     }
 
     public double getBMI(int height, int weight){
         double weight2 = weight;
         double BMI = (weight2/ height/ height) * 703;
-        System.out.println(BMI);
         return Double.parseDouble(df.format(BMI));
     }
 
