@@ -130,7 +130,7 @@ public class Main {
                     JOptionPane.showMessageDialog(null, "Exiting.\nSee you tomorrow!");
 
             }
-        } while (choice != 5) ;
+        } while (choice != 6) ;
     }
 
     public static int caloriesBurnedCalc() {
