@@ -80,9 +80,7 @@ public class Main {
                         if (exercise == JOptionPane.YES_OPTION) {
                             int caloriesBurned = caloriesBurnedCalc();
                             tracker.burnCalories(caloriesBurned);
-                            JOptionPane.showMessageDialog(null, "Without exercise, your current calorie intake was: "
-                                    + (tracker.getCurrentCalories() + caloriesBurned) + " calories."
-                                    + "\nSince you did exercise, you burned " + caloriesBurned + " calories! Excellent job!!"
+                            JOptionPane.showMessageDialog(null, "You burned " + caloriesBurned + " calories! Excellent job!!"
                                     + "\nYour current calorie intake is now: " + tracker.getCurrentCalories());
                         } else {
                             JOptionPane.showMessageDialog(null, "No exercise added. Returning you home...");
@@ -116,7 +114,7 @@ public class Main {
                     	if (seeFoodRep == JOptionPane.YES_OPTION) {
                     		StringBuilder allFoods = new StringBuilder();
                             for (int i = 0; i < food.size(); i++) {
-                                allFoods.append("\n" + food.get(i));
+                                allFoods.append("\n" + (i+1) + ". " + food.get(i));
                             }
                             JOptionPane.showMessageDialog(null, "Today's Food: \n" + allFoods);
                     	}
