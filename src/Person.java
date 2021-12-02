@@ -1,3 +1,5 @@
+package health;
+
 import java.text.DecimalFormat;
 
 public class Person {
@@ -11,10 +13,17 @@ public class Person {
         this.name = name;
         this.height = height;
         this.weight = weight;
+<<<<<<< HEAD
 
         //goal is set to 0 or higher
         if (goal < 0) {
             goal = 0;
+=======
+        
+        //goal is set to 0 or higher
+        if (goal < 0) {
+        	goal = 0;
+>>>>>>> bfb4a9f805866f29820211ac92f399c4e1dd2249
         }
         tracker = new CalorieTracker(goal);
     }
