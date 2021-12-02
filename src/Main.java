@@ -1,3 +1,5 @@
+package health;
+
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -8,7 +10,6 @@ public class Main {
         ArrayList<String> food = new ArrayList<String>();
 
         menu(user, food);
-
     }
 
     public static Person createPerson() {
@@ -43,28 +44,30 @@ public class Main {
 
             choice = Integer.parseInt(JOptionPane.showInputDialog("Main Menu Options:\n"
                     + "1. Update Calories \n"
-                    + "2. Go to Update Menu  \n"                                            // change wording --- if anyone has suggestions go for it
-                    + "3. View Progress \n"
-                    + "4. View Profile \n"
-                    + "5. End Day \n"
-                    + "Enter menu option (1-4) you would like to perform: "));
+                    + "2. Add Water Intake \n"
+                    + "3. Go to Update Menu  \n"                     
+                    + "4. View Progress \n"
+                    + "5. View Profile \n"
+                    + "6. End Day \n"
+                    + "Enter menu option (1-6) you would like to perform: "));
 
-            while (choice > 5 || choice < 1) {
-                choice = Integer.parseInt(JOptionPane.showInputDialog("Invalid Entry! Enter a number from 1-4: \n"
+            while (choice > 6 || choice < 1) {
+                choice = Integer.parseInt(JOptionPane.showInputDialog("Invalid Entry! Enter a number from 1-6: \n"
                         + "Main Menu Options:\n"
                         + "1. Update Calories \n"
-                        + "2. Go to Update Menu  \n"                                            // change wording --- if anyone has suggestions go for it
-                        + "3. View Progress \n"
-                        + "4. View Profile \n"
-                        + "5. End Day \n"
-                        + "Enter menu option (1-4) you would like to perform: "));
+                        + "2. Add Water Intake \n"
+                        + "3. Go to Update Menu  \n"                     
+                        + "4. View Progress \n"
+                        + "5. View Profile \n"
+                        + "6. End Day \n"
+                        + "Enter menu option (1-6) you would like to perform: "));
             }
 
             switch (choice) {
 
                 case 1:
                     int calChoice = Integer.parseInt(JOptionPane.showInputDialog("Options: \n" +
-                            "1. Add Calories " +
+                            "1. Add Calories \n" +
                             "2. Decrease Calories through Exercise "));
 
                     if (calChoice == 1) {
@@ -91,16 +94,19 @@ public class Main {
                         JOptionPane.showMessageDialog(null, tracker.getGoalMessage());
                     }
                     break;
-
                 case 2:
+                	addWater(user);
+                	break;
+
+                case 3:
                     updateMenu(user, tracker);
                     break;
 
-                case 3:
+                case 4:
                     JOptionPane.showMessageDialog(null, user.displayInfo());
                     break;
 
-                case 4:
+                case 5:
                     JOptionPane.showMessageDialog(null, user.displayProfile());
                     break;
 
@@ -214,8 +220,21 @@ public class Main {
                             break;
                     }
                     break;
-                default: JOptionPane.showMessageDialog(null, "Back to Main Menu");
+                default:
+                	JOptionPane.showMessageDialog(null, "Back to Main Menu");
+                	
             }
         } while (choice != 3);
     }
+    
+    public static void addWater(Person user) {
+    	
+    	double water = Double.parseDouble(JOptionPane.showInputDialog("Enter water intake in oz: "));
+    	if (water > 0) {
+    	user.addWater(water);
+    	JOptionPane.showMessageDialog(null, "Your current water intake is " + user.getWaterIntake() + " oz.");
+    	}
+    }
+    
+   
 }
