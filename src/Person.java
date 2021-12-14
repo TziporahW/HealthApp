@@ -10,7 +10,7 @@ public class Person {
     private WaterTracker waterTracker;
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
-    public Person(String name, int height, int weight, int goal){
+    public Person(String name, int height, int weight, int goal,int waterGoal){
         this.name = name;
         this.height = height;
         this.weight = weight;
@@ -20,7 +20,7 @@ public class Person {
         	goal = 0;
         }
         calTracker = new CalorieTracker(goal);
-        waterTracker = new WaterTracker();
+        waterTracker = new WaterTracker(waterGoal);
     }
 
     public double getBMI(int height, int weight){
@@ -33,8 +33,8 @@ public class Person {
         return calTracker;
     }
     
-    public double getWaterIntake() {
-    	return waterTracker.getCurrentIntake();
+    public String getWaterIntake() {
+    	return waterTracker.toString();
     }
     
     public void addWater(double waterIntake) {
@@ -43,6 +43,7 @@ public class Person {
     		waterTracker.addWater(waterIntake);
     	}
     }
+    
 
     public void setWeight(int weight){
         this.weight = weight;
@@ -62,7 +63,7 @@ public class Person {
     public String displayProfile(){
         StringBuilder string = new StringBuilder();
         string.append("Hello " + name + "!\n" +
-                "Your height is: " + height + " inches and your weight is: " + weight + " pounds. \n" +
+                "Your height is: " + (height/12) + "'"+ (height%12) + " and your weight is: " + weight + " pounds. \n" +
                 "Your BMI is: " + getBMI(height, weight));
         return string.toString();
     }
