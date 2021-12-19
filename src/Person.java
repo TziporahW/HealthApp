@@ -28,9 +28,32 @@ public class Person {
         double BMI = (weight2/ height/ height) * 703;
         return Double.parseDouble(df.format(BMI));
     }
+    
+    public void addCalories(int calories) {
+    	calTracker.addCalories(calories);
+    }
 
-    public CalorieTracker getCalorieTracker(){
-        return calTracker;
+    public int getCurrentCalories() {
+    	return calTracker.getCurrentCalories();
+    }
+    
+    public void burnCalories(int calories) {
+    	calTracker.burnCalories(calories);
+    }
+    
+   
+    public boolean reachedCalLimit() {
+    	return calTracker.reachedLimit();
+    }
+    public void setCalGoal(int goal) {
+    	calTracker.setGoal(goal);
+    }
+    
+    public int getCalGoal() {
+    	return calTracker.getGoal();
+    }
+    public String getCalGoalMessage() {
+    	return calTracker.getGoalMessage();
     }
     
     public String getWaterIntake() {
