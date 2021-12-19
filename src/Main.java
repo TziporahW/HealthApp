@@ -54,7 +54,6 @@ public class Main {
 
 	public static void menu(Person user, ArrayList<String> food) {
 		int choice;
-		CalorieTracker tracker = user.getCalorieTracker();
 
 		do {
 
@@ -81,26 +80,26 @@ public class Main {
 				if (calChoice == 1) {
 					food.add(JOptionPane.showInputDialog("What did you eat?"));
 					int caloriesToAdd = Integer.parseInt(JOptionPane.showInputDialog("How many calories? "));
-					tracker.addCalories(caloriesToAdd);
+					user.addCalories(caloriesToAdd);
 					JOptionPane.showMessageDialog(null,
-							"Your current calorie intake is: " + tracker.getCurrentCalories() + " calories.");
+							"Your current calorie intake is: " + user.getCurrentCalories() + " calories.");
 				} else {
 					int exercise = JOptionPane.showConfirmDialog(null, "Did you do any exercise?", "",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 
 					if (exercise == JOptionPane.YES_OPTION) {
 						int caloriesBurned = caloriesBurnedCalc();
-						tracker.burnCalories(caloriesBurned);
+						user.burnCalories(caloriesBurned);
 						JOptionPane.showMessageDialog(null,
 								"You burned " + caloriesBurned + " calories! Excellent job!!"
-										+ "\nYour current calorie intake is now: " + tracker.getCurrentCalories());
+										+ "\nYour current calorie intake is now: " + user.getCurrentCalories());
 					} else {
 						JOptionPane.showMessageDialog(null, "No exercise added. Returning you home...");
 					}
 				}
 
-				if (tracker.reachedLimit()) {
-					JOptionPane.showMessageDialog(null, tracker.getGoalMessage());
+				if (user.reachedCalLimit()) {
+					JOptionPane.showMessageDialog(null, user.getCalGoalMessage());
 				}
 				break;
 			case 2:
@@ -108,7 +107,7 @@ public class Main {
 				break;
 
 			case 3:
-				updateMenu(user, tracker);
+				updateMenu(user);
 				break;
 
 			case 4:
@@ -170,7 +169,7 @@ public class Main {
 		return caloriesBurned;
 	}
 
-	public static void updateMenu(Person user, CalorieTracker tracker) {
+	public static void updateMenu(Person user) {
 		int choice;
 		do {
 			choice = Integer.parseInt(
@@ -187,14 +186,14 @@ public class Main {
 
 			case 1:
 				int goal = Integer.parseInt(JOptionPane.showInputDialog(
-						"Your current daily calorie intake goal is " + user.getCalorieTracker().getGoal() + " calories."
+						"Your current daily calorie intake goal is " + user.getCalGoal() + " calories."
 								+ "\nWhat do you want want your new goal to be? "));
 
 				while (goal < 0) {
 					goal = Integer.parseInt(JOptionPane.showInputDialog("Invalid Goal! \nEnter a positive number."));
 				}
 
-				tracker.setGoal(goal);
+				user.setCalGoal(goal);
 				JOptionPane.showMessageDialog(null, "Calorie goal has been updated to " + goal + " calories.");
 				break;
 
