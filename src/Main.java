@@ -20,8 +20,7 @@ public class Main {
 		
 		int height;
 		int weight;
-		String selectedMeasurement = (String)pick;
-		
+		String selectedMeasurement = (String)pick;		
 
 		if (selectedMeasurement.equals("Inches/Pounds")) {
 
@@ -46,8 +45,6 @@ public class Main {
 				height = Integer
 						.parseInt(JOptionPane.showInputDialog("That is invalid! Please enter your height in centimeters (no decimals): "));
 			}
-			
-
 			
 			weight = Integer
 					.parseInt(JOptionPane.showInputDialog("Please enter your weight rounded to the nearest kilograms (no decimals): "));
@@ -76,7 +73,7 @@ public class Main {
 			}
 		} else {
 			waterGoal = 64;
-			JOptionPane.showMessageDialog(null, "You should drink at least 64 oz today.");
+			JOptionPane.showMessageDialog(null, "Water intake goal set to 64 oz.");
 		}
 		Person user = new Person(name, selectedMeasurement, height, weight, goal, waterGoal);
 		JOptionPane.showMessageDialog(null, user.displayProfile());
