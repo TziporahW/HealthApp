@@ -14,16 +14,48 @@ public class Main {
 
 	public static Person createPerson() {
 		String name = JOptionPane.showInputDialog("Hello! What is your name? ");
-		int height = Integer.parseInt(JOptionPane.showInputDialog("Please enter your height in inches: "));
-		while (height < 36 || height > 100) {
-			height = Integer
-					.parseInt(JOptionPane.showInputDialog("That is invalid! Please enter your height in inches: "));
-		}
-		int weight = Integer
-				.parseInt(JOptionPane.showInputDialog("Please enter your weight rounded to the nearest pound: "));
-		while (weight < 45 || weight > 1500) {
+		Object[] measurements = { "Inches/Pounds", "Centimeters/Kilograms" };
+		Object pick = JOptionPane.showInputDialog(null, "Height and weight in?", "Input",
+				JOptionPane.INFORMATION_MESSAGE, null, measurements, measurements[0]);
+		
+		int height;
+		int weight;
+		String selectedMeasurement = (String)pick;
+		
+
+		if (selectedMeasurement.equals("Inches/Pounds")) {
+
+			height = Integer.parseInt(JOptionPane.showInputDialog("Please enter your height in inches: "));
+
+			while (height < 36 || height > 100) {
+				height = Integer
+						.parseInt(JOptionPane.showInputDialog("That is invalid! Please enter your height in inches: "));
+			}
+
 			weight = Integer
-					.parseInt(JOptionPane.showInputDialog("That is invalid! Please enter your weight in pounds: "));
+					.parseInt(JOptionPane.showInputDialog("Please enter your weight rounded to the nearest pound: "));
+			while (weight < 45 || weight > 1500) {
+				weight = Integer
+						.parseInt(JOptionPane.showInputDialog("That is invalid! Please enter your weight in pounds: "));
+			}
+		}
+		else {
+			height = Integer.parseInt(JOptionPane.showInputDialog("Please enter your height in centimeters (no decimals): "));
+
+			while (height < 91 || height > 254) {
+				height = Integer
+						.parseInt(JOptionPane.showInputDialog("That is invalid! Please enter your height in centimeters (no decimals): "));
+			}
+			
+
+			
+			weight = Integer
+					.parseInt(JOptionPane.showInputDialog("Please enter your weight rounded to the nearest kilograms (no decimals): "));
+			while (weight < 20 || weight > 680) {
+				weight = Integer
+						.parseInt(JOptionPane.showInputDialog("That is invalid! Please enter your weight in kilograms (no decimals): "));
+			}
+			
 		}
 
 		int goal = Integer.parseInt(JOptionPane.showInputDialog("Please enter your desired calorie intake per day: "));
@@ -33,9 +65,9 @@ public class Main {
 
 		int addWaterGoal = JOptionPane.showConfirmDialog(null, "Would you like to add a water intake goal?", "",
 				JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-		int waterGoal; 
+		int waterGoal;
 		if (addWaterGoal == JOptionPane.YES_OPTION) {
-			waterGoal= Integer
+			waterGoal = Integer
 					.parseInt(JOptionPane.showInputDialog("Please enter your desired water intake per day: "));
 			while (waterGoal < 0) {
 				waterGoal = Integer
@@ -46,7 +78,7 @@ public class Main {
 			waterGoal = 64;
 			JOptionPane.showMessageDialog(null, "You should drink at least 64 oz today.");
 		}
-		Person user = new Person(name, height, weight, goal,waterGoal);
+		Person user = new Person(name, selectedMeasurement, height, weight, goal, waterGoal);
 		JOptionPane.showMessageDialog(null, user.displayProfile());
 
 		return user;
@@ -73,10 +105,10 @@ public class Main {
 			case 1:
 				int calChoice = Integer.parseInt(JOptionPane.showInputDialog(
 						"Options: \n" + "1. Add Calories \n" + "2. Decrease Calories through Exercise "));
-					while(calChoice != 1 && calChoice !=2 ) {
-						calChoice = Integer.parseInt(JOptionPane.showInputDialog(
-								"Options: \n" + "1. Add Calories \n" + "2. Decrease Calories through Exercise "));				
-					}
+				while (calChoice != 1 && calChoice != 2) {
+					calChoice = Integer.parseInt(JOptionPane.showInputDialog(
+							"Options: \n" + "1. Add Calories \n" + "2. Decrease Calories through Exercise "));
+				}
 				if (calChoice == 1) {
 					food.add(JOptionPane.showInputDialog("What did you eat?"));
 					int caloriesToAdd = Integer.parseInt(JOptionPane.showInputDialog("How many calories? "));
@@ -185,9 +217,8 @@ public class Main {
 			switch (choice) {
 
 			case 1:
-				int goal = Integer.parseInt(JOptionPane.showInputDialog(
-						"Your current daily calorie intake goal is " + user.getCalGoal() + " calories."
-								+ "\nWhat do you want want your new goal to be? "));
+				int goal = Integer.parseInt(JOptionPane.showInputDialog("Your current daily calorie intake goal is "
+						+ user.getCalGoal() + " calories." + "\nWhat do you want want your new goal to be? "));
 
 				while (goal < 0) {
 					goal = Integer.parseInt(JOptionPane.showInputDialog("Invalid Goal! \nEnter a positive number."));
@@ -209,17 +240,35 @@ public class Main {
 				switch (profileOption) {
 
 				case 1:
-					int weight = Integer
-							.parseInt(JOptionPane.showInputDialog("Please enter your new weight in pounds: "));
-					user.setWeight((weight));
-					JOptionPane.showMessageDialog(null, "Your weight has been updated to " + weight + " pounds!");
+					if(user.getSelectedMeasurement().equals("Inches/Pounds")) {
+						int weight = Integer
+								.parseInt(JOptionPane.showInputDialog("Please enter your new weight in pounds: "));
+						user.setWeight((weight));
+						JOptionPane.showMessageDialog(null, "Your weight has been updated to " + weight + " pounds!");
+					}
+					else {
+						int weight = Integer
+								.parseInt(JOptionPane.showInputDialog("Please enter your new weight in kilograms (no decimals): "));
+						user.setWeight((weight));
+						JOptionPane.showMessageDialog(null, "Your weight has been updated to " + weight + " kilograms!");
+					}
+
 					break;
 
 				default:
-					int height = Integer
-							.parseInt(JOptionPane.showInputDialog("Please enter your new height in inches: "));
-					user.setHeight(height);
-					JOptionPane.showMessageDialog(null, "Your height has been updated to " + height + " inches!");
+					if(user.getSelectedMeasurement().equals("Inches/Pounds")) {
+						int height = Integer
+								.parseInt(JOptionPane.showInputDialog("Please enter your new height in inches: "));
+						user.setHeight(height);
+						JOptionPane.showMessageDialog(null, "Your height has been updated to " + height + " inches!");
+					}
+					else {
+						int height = Integer
+								.parseInt(JOptionPane.showInputDialog("Please enter your new height in centimeters (no decimals): "));
+						user.setHeight(height);
+						JOptionPane.showMessageDialog(null, "Your height has been updated to " + height + " centimeters!");
+					}
+					
 					break;
 				}
 				break;
