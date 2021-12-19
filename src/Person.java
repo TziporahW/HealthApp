@@ -27,15 +27,16 @@ public class Person {
 
 	public double getBMI() {
 		double BMI;
-		int usedW = weight;
-		int usedH = height;
-		if (selectedMeasurement.equals("Inches/Pounds")) {
-			BMI = (usedW / usedH / usedH) * 703;
+
+		if (selectedMeasurement.equals("Inches/Pounds")) {	
+			BMI =  (weight / (double) (height * height)) * 703;
+		
 		} else {
 			// convert height to meters
-			double heightMeters = usedH / 100;
-			BMI = (usedW / heightMeters / heightMeters);
+			double heightInMeters = height / 100;
+			BMI =  (weight / (double) (heightInMeters * heightInMeters));
 		}
+
 		return Double.parseDouble(df.format(BMI));
 	}
 
