@@ -1,5 +1,3 @@
-package health;
-
 public class CalorieTracker {
     private int goal;
     private int currentCalorieIntake;
