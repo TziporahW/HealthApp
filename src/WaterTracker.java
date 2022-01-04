@@ -15,6 +15,16 @@ public class WaterTracker {
         }
     }
 
+    public void setGoal(int goal) {
+
+        if (goal > 0)
+            this.goal = goal;
+    }
+
+    public int getGoal() {
+        return goal;
+    }
+
     public double getCurrentIntake() {
 
         return currentIntake;
@@ -26,9 +36,9 @@ public class WaterTracker {
     }
 
     public String getGoalMessage() {
-        String message = "You haven't drank enough today! Drink more! You don't want to dehydrate!";
+        String message = "You haven't drank enough today!\nDrink more so you don't dehydrate!";
         if (reachedGoal()) {
-            message = "Good job! You've drinken enough today";
+            message = "Good job! You drank enough today";
         }
         return message;
     }
