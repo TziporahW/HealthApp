@@ -1,3 +1,5 @@
+package health;
+
 public class WaterTracker {
 
     private int goal;

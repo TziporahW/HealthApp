@@ -1,3 +1,5 @@
+package health;
+
 import java.text.DecimalFormat;
 
 public class Person {

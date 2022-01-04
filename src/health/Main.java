@@ -1,3 +1,5 @@
+package health;
+
 import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -91,13 +93,13 @@ public class Main {
 
     public static int getMenuOption() {
         int choice;
-        choice = Integer.parseInt(JOptionPane.showInputDialog("Main Menu Options:\n" + "1. Update Calories \n"
+        choice = Integer.parseInt(JOptionPane.showInputDialog("health.Main Menu Options:\n" + "1. Update Calories \n"
                 + "2. Add Water Intake \n" + "3. Go to Update Menu  \n" + "4. View Progress \n" + "5. View Profile \n"
                 + "6. End Day \n" + "Enter menu option (1-6) you would like to perform: "));
 
         while (choice > 6 || choice < 1) {
             choice = Integer.parseInt(JOptionPane.showInputDialog("Invalid Entry! Enter a number from 1-6: \n"
-                    + "Main Menu Options:\n" + "1. Update Calories \n" + "2. Add Water Intake \n"
+                    + "health.Main Menu Options:\n" + "1. Update Calories \n" + "2. Add Water Intake \n"
                     + "3. Go to Update Menu  \n" + "4. View Progress \n" + "5. View Profile \n" + "6. End Day \n"
                     + "Enter menu option (1-6) you would like to perform: "));
         }
@@ -232,14 +234,14 @@ public class Main {
     public static int getUpdateMenuOption() {
         int choice;
         choice = Integer.parseInt(JOptionPane.showInputDialog("Update Menu Options:\n" + "1. Update Calorie Goal \n"
-                + "2. Update Water Goal \n" + "3. Update Profile \n" + "4. Go back to Main Menu \n"
+                + "2. Update Water Goal \n" + "3. Update Profile \n" + "4. Go back to health.Main Menu \n"
                 + "Enter menu option (1-4) you would like to perform: "));
 
         while (choice > 4 || choice < 1) {
             choice = Integer.parseInt(
                     JOptionPane.showInputDialog("Invalid Entry - Enter a number from 1-4: \n" + "Menu Options:\n"
                             + "1. Update Calorie Goal \n" + "2. Update Water Goal \n" + "3. Update Profile \n"
-                            + "4. Go back to Main Menu \n" + "Enter menu option (1-4) you would like to perform: "));
+                            + "4. Go back to health.Main Menu \n" + "Enter menu option (1-4) you would like to perform: "));
 
         }
         return choice;
@@ -287,7 +289,7 @@ public class Main {
                     }
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Back to Main Menu");
+                    JOptionPane.showMessageDialog(null, "Back to health.Main Menu");
 
             }
         } while (choice != 4);
