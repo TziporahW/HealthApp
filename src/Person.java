@@ -37,11 +37,32 @@ public class Person {
 
         } else {
             // convert height to meters
-            double heightInMeters = height / 100;
+            double heightInMeters = (double) height / 100;
             BMI =  (weight / (double) (heightInMeters * heightInMeters));
         }
 
         return Double.parseDouble(df.format(BMI));
+    }
+
+    public String getWeightStatus() {
+
+        String weightStatus;
+        double bmi = getBMI();
+
+        if (bmi < 18.5)
+            weightStatus = "Underweight";
+        else if (bmi < 24.9)
+            weightStatus = "Healthy weight";
+        else if (bmi < 29.9)
+            weightStatus = "Overweight";
+        else
+            weightStatus = "Obese";
+
+        return weightStatus;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 
     public void addCalories(int calories) {
@@ -83,6 +104,13 @@ public class Person {
         }
     }
 
+    public void setWaterGoal(int goal) {
+        waterTracker.setGoal(goal);
+    }
+
+    public int getWaterGoal() {
+        return waterTracker.getGoal();
+    }
     public String getSelectedMeasurement() {
         return selectedMeasurement;
     }
@@ -120,39 +148,56 @@ public class Person {
     }
 
     public double getCarbsPercentage(){
-        double percentage = (Double.valueOf(getCarbs()) / calTracker.getCurrentCalories()) * 100;
-        return Double.parseDouble(df.format(percentage));
+        double percentage = (Double.valueOf(getCarbs()) / (getFruitVeggies() + getCarbs() + getProtein())) * 100;
+        if(Double.isNaN(percentage)){
+            return 0;
+        } else {
+            return Double.parseDouble(df.format(percentage));
+        }
     }
 
     public double getProteinPercentage(){
-        double percentage = (Double.valueOf(getProtein()) / calTracker.getCurrentCalories()) * 100;
-        return Double.parseDouble(df.format(percentage));
+        double percentage = (Double.valueOf(getProtein()) / (getFruitVeggies() + getCarbs() + getProtein())) * 100;
+        if(Double.isNaN(percentage)){
+            return 0;
+        } else {
+            return Double.parseDouble(df.format(percentage));
+        }
     }
 
     public double getFruitsVeggiesPercentage(){
-        double percentage = (Double.valueOf(getFruitVeggies()) / calTracker.getCurrentCalories()) * 100;
-        return Double.parseDouble(df.format(percentage));
+        double percentage = (Double.valueOf(getFruitVeggies()) / (getFruitVeggies() + getCarbs() + getProtein())) * 100;
+        if(Double.isNaN(percentage)){
+            return 0;
+        } else {
+            return Double.parseDouble(df.format(percentage));
+        }
     }
 
 
 
     public String displayInfo() {
         StringBuilder string = new StringBuilder();
-        string.append("Hello " + name + "!\n" + calTracker.toString());
+        string.append("\tHello " + name + "!\n" + calTracker.toString());
         string.append("\n" + waterTracker.toString());
-        string.append("\nYou ate: " + getCarbsPercentage() + "% carbs, " + getProteinPercentage() + "% protein, and " + getFruitsVeggiesPercentage() + "% fruit/vegetables.");
         return string.toString();
+    }
+
+    public String getFoodBreakdown() {
+        return "Food Group Breakdown: \n" + getCarbsPercentage() + "% carbs \n" + getProteinPercentage() + "% protein \n " + getFruitsVeggiesPercentage() + "% fruit/vegetables";
     }
 
     public String displayProfile() {
         StringBuilder string = new StringBuilder();
         if (selectedMeasurement.equals("Inches/Pounds")) {
-            string.append("Hello " + name + "!\n" + "Your height is: " + (height / 12) + "'" + (height % 12)
-                    + " and your weight is: " + weight + " pounds. \n" + "Your BMI is: " + getBMI());
+            string.append("\tHello " + name + "!\n" + "Your height is: " + (height / 12) + "'" + (height % 12)
+                    + "\nYour weight is: " + weight + " pounds. \n" + "Your BMI is: " + getBMI() +
+                    "\nWeight Status: " + getWeightStatus());
         }
         else {
-            string.append("Hello " + name + "!\n" + "Your height is: " + height + " centimeters"
-                    + " and your weight is: " + weight + " kilograms. \n" + "Your BMI is: " + getBMI());
+            string.append("\tHello " + name + "!\n" + "Your height is: " + height + " centimeters"
+                    + "\nYour weight is: " + weight + " kilograms. \n" + "Your BMI is: " + getBMI() +
+                    "\nWeight Status: " + getWeightStatus());
         }
         return string.toString();
     }
